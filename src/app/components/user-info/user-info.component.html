@@ -1,0 +1,49 @@
+<h3>Hello {{userInfo.name}}</h3>
+<p><strong>Email: </strong>
+  {{userInfo.email}}
+</p>
+<p><strong>Age: </strong>
+  {{userInfo.age}}
+</p>
+<p><strong>Address: </strong>
+  {{userInfo.address.street}}, {{userInfo.address.city}}, {{userInfo.address.state}}
+</p>
+<button (click)="toggleUserHobbies()">{{showUserHobbies ? 'Hide' : 'Show'}} User Hobbies</button>
+<div *ngIf="showUserHobbies">
+  <h4>Hobbies:</h4>
+  <ul>
+    <li *ngFor="let hobby of userInfo.hobbies; let hobbyIndex = index">
+      {{hobby}} <button (click)="deleteHobby(hobbyIndex)">x</button>
+    </li>
+  </ul>
+  <form (submit)="addHobby(hobby.value)">
+    <p>
+      <label>Add Hobby: </label>
+      <input type="text" name="hobby" #hobby />
+    </p>
+  </form>
+</div>
+<hr />
+<h3>Edit User</h3>
+
+<form>
+  <p>
+    <label>Name: </label>
+    <input type="text" name="name" [(ngModel)] = "userInfo.name" />
+  </p>
+  <p>
+    <label>Email: </label>
+    <input type="text" name="email" [(ngModel)] = "userInfo.email" />
+  </p>
+  <p>
+    <label>Age: </label>
+    <input type="text" name="age" [(ngModel)] = "userInfo.age" />
+  </p>
+  <p>
+    <label>Address Street: </label>
+    <input type="text" name="street" [(ngModel)] = "userInfo.address.street" />
+  </p>
+
+
+</form>
+
