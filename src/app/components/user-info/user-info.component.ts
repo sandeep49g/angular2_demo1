@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
+import { PostsService } from '../../services/posts.service';
 
 @Component({
   selector: 'user-info',
-  templateUrl: './user-info.component.html'
+  templateUrl: './user-info.component.html',
+  providers: [PostsService]
 })
 export class UserInfoComponent  {
   userInfo: userInfo;
   showUserHobbies: boolean;
 
-  constructor() {
+  constructor(private postsService: PostsService) {
     this.userInfo = {
       name: 'Sandeep',
       email: 'sandeep@xyz.in',
@@ -18,9 +20,15 @@ export class UserInfoComponent  {
         city: 'New York',
         state: 'NY'
       },
-      hobbies: ['Cricket', 'Music', 'News']
+      hobbies: ['Cricket', 'Music', 'News'],
+      posts: []
     }
     this.showUserHobbies = false;
+
+    this.postsService.getPosts().subscribe(posts => {
+      this.userInfo.posts = posts;
+      this.abc = posts;
+    });
   }
 
   toggleUserHobbies() {
@@ -29,8 +37,8 @@ export class UserInfoComponent  {
 
   addHobby(hobby: string) {
     this.userInfo.hobbies.push(hobby);
-  }  
-  
+  }
+
   deleteHobby(hobbyIndex: number) {
     this.userInfo.hobbies.splice(hobbyIndex, 1);
   }
@@ -41,11 +49,18 @@ interface userInfo {
   email: string;
   age: number;
   address: address;
-  hobbies: string[]
+  hobbies: string[];
+  posts: post[];
 }
 
 interface address {
   street: string;
   city: string;
   state: string;
+}
+
+interface post {
+  id: number;
+  title: string;
+  body: string;
 }

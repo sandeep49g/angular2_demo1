@@ -8,6 +8,7 @@
 <p><strong>Address: </strong>
   {{userInfo.address.street}}, {{userInfo.address.city}}, {{userInfo.address.state}}
 </p>
+
 <button (click)="toggleUserHobbies()">{{showUserHobbies ? 'Hide' : 'Show'}} User Hobbies</button>
 <div *ngIf="showUserHobbies">
   <h4>Hobbies:</h4>
@@ -23,9 +24,9 @@
     </p>
   </form>
 </div>
+
 <hr />
 <h3>Edit User</h3>
-
 <form>
   <p>
     <label>Name: </label>
@@ -43,7 +44,12 @@
     <label>Address Street: </label>
     <input type="text" name="street" [(ngModel)] = "userInfo.address.street" />
   </p>
-
-
 </form>
+
+<hr />
+<h3>Posts</h3>
+<div *ngFor="let post of userInfo.posts">
+  <h4>{{post.title}}</h4>
+  <p>{{post.body}}</p>
+</div>
 
