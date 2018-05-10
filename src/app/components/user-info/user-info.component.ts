@@ -27,7 +27,6 @@ export class UserInfoComponent  {
 
     this.postsService.getPosts().subscribe(posts => {
       this.userInfo.posts = posts;
-      this.abc = posts;
     });
   }
 
